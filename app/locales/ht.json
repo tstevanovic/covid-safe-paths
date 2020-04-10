@@ -1,5 +1,127 @@
 {
-  " MIT, Harvard, The Mayo Clinic, TripleBlind, EyeNetra, Ernst & Young and Link Ventures": {
-    "_team_para": ""
+  "label.no_data": "label.no_data",
+  "label.less_than_one_minute": "label.less_than_one_minute",
+  "location": {
+    "COVID Safe Paths Enabled": "location|COVID Safe Paths Enabled",
+    "COVID Safe Paths is securely storing your GPS coordinates once every five minutes on this device.": "location|COVID Safe Paths is securely storing your GPS coordinates once every five minutes on this device.",
+    "label.location_disabled_title": "location|label.location_disabled_title",
+    "label.location_disabled_message": "location|label.location_disabled_message"
+  },
+  "About": "About",
+  "about": {
+    "Commitment": "about|Commitment",
+    "Safe Paths securely records and checks your interaction with people using your location. Your data will NEVER leave your phone without your consent.": "about|Safe Paths securely records and checks your interaction with people using your location. Your data will NEVER leave your phone without your consent.",
+    "Team": "about|Team",
+    "Our team is composed of a consortium of epidemiologists, engineers, data scientists, digital privacy evangelists, professors and researchers from reputable institutions, including: MIT, Harvard, The Mayo Clinic, TripleBlind, EyeNetra, Ernst & Young and Link Ventures.": "about|Our team is composed of a consortium of epidemiologists, engineers, data scientists, digital privacy evangelists, professors and researchers from reputable institutions, including: MIT, Harvard, The Mayo Clinic, TripleBlind, EyeNetra, Ernst & Young and Link Ventures."
+  },
+  "provider": {
+    "authorities_removal_alert_title": "provider|authorities_removal_alert_title",
+    "authorities_removal_alert_desc": "provider|authorities_removal_alert_desc",
+    "authorities_removal_alert_proceed": "provider|authorities_removal_alert_proceed",
+    "Choose health authority": "provider|Choose health authority",
+    "Trusted sources": "provider|Trusted sources",
+    "You can get data from one or more h...": "provider|You can get data from one or more h...",
+    "No sources": "provider|No sources",
+    "authorities_input_placeholder": "provider|authorities_input_placeholder",
+    "Paste your URL here": "provider|Paste your URL here",
+    "Add Trusted Source": "provider|Add Trusted Source",
+    "Add URL": "provider|Add URL"
+  },
+  "Cancel": "Cancel",
+  "export": {
+    "I tested positive": "export|I tested positive",
+    "Please do your part in stopping COVID-19 ...": "export|Please do your part in stopping COVID-19 ...",
+    "Location is shared as a simple list of times ...": "export|Location is shared as a simple list of times ...",
+    "Share location data": "export|Share location data"
+  },
+  "import": {
+    "Import Locations": "import|Import Locations",
+    "Log in to your google account": "import|Log in to your google account",
+    "After downloaded ...": "import|After downloaded ..."
+  },
+  "legal": {
+    "terms_of_use_url": "legal|terms_of_use_url",
+    "Terms of Use": "legal|Terms of Use"
+  },
+  "Legal": "Legal",
+  "main": {
+    "push_at_risk_title": "main|push_at_risk_title",
+    "push_at_risk_message": "main|push_at_risk_message",
+    "No known contact": "main|No known contact",
+    "home_at_risk_header": "main|home_at_risk_header",
+    "home_unknown_header": "main|home_unknown_header",
+    "home_at_risk_subtext": "main|home_at_risk_subtext",
+    "home_unknown_subtext": "main|home_unknown_subtext",
+    "home_at_risk_subsubtext": "main|home_at_risk_subsubtext",
+    "Next steps": "main|Next steps",
+    "home_mayo_link_heading": "main|home_mayo_link_heading",
+    "home_mayo_link_label": "main|home_mayo_link_label"
+  },
+  "Enable location": "Enable location",
+  "home_mayo_link_URL": "home_mayo_link_URL",
+  "news": {
+    "Default news site name": "news|Default news site name",
+    "default_news_site_url": "news|default_news_site_url",
+    "Latest news": "news|Latest news"
+  },
+  "Event history": "Event history",
+  "history": {
+    "2-Week Exposure Profile": "history|2-Week Exposure Profile",
+    "Today": "history|Today",
+    "2 weeks ago": "history|2 weeks ago",
+    "No exposure": "history|No exposure",
+    "notifications_exposure_format_today": "history|notifications_exposure_format_today",
+    "notifications_exposure_format_yesterday": "history|notifications_exposure_format_yesterday",
+    "notifications_exposure_format": "history|notifications_exposure_format",
+    "What does this mean?": "history|What does this mean?",
+    "No data available": "history|No data available",
+    "If a Healthcare Authority exists in your area ...": "history|If a Healthcare Authority exists in your area ...",
+    "Select Healthcare Authority": "history|Select Healthcare Authority"
+  },
+  "If you have no symptoms but still would like to be tested you can go to your nearest testing site.": "If you have no symptoms but still would like to be tested you can go to your nearest testing site.",
+  "onboarding": {
+    "The way back to normal starts here": "onboarding|The way back to normal starts here",
+    "Get Started": "onboarding|Get Started"
+  },
+  "label.launch_screen2_header": "label.launch_screen2_header",
+  "label.launch_screen2_subheader": "label.launch_screen2_subheader",
+  "label.launch_next": "label.launch_next",
+  "label.launch_screen3_header": "label.launch_screen3_header",
+  "label.launch_screen3_subheader": "label.launch_screen3_subheader",
+  "label.launch_screen4_header": "label.launch_screen4_header",
+  "label.launch_screen4_subheader": "label.launch_screen4_subheader",
+  "label.launch_set_up_phone": "label.launch_set_up_phone",
+  "label.launch_location_header": "label.launch_location_header",
+  "label.launch_notif_header": "label.launch_notif_header",
+  "label.launch_done_header": "label.launch_done_header",
+  "label.launch_location_subheader": "label.launch_location_subheader",
+  "label.launch_notif_subheader": "label.launch_notif_subheader",
+  "label.launch_done_subheader": "label.launch_done_subheader",
+  "label.launch_location_access": "label.launch_location_access",
+  "label.launch_notification_access": "label.launch_notification_access",
+  "label.launch_enable_location": "label.launch_enable_location",
+  "label.launch_enable_notif": "label.launch_enable_notif",
+  "label.launch_finish_set_up": "label.launch_finish_set_up",
+  "label.show_overlap": "label.show_overlap",
+  "label.overlap_found_button_label": "label.overlap_found_button_label",
+  "label.overlap_no_results_button_label": "label.overlap_no_results_button_label",
+  "label.loading_public_data": "label.loading_public_data",
+  "label.overlap_title": "label.overlap_title",
+  "label.overlap_para_1": "label.overlap_para_1",
+  "label.nCoV2019_url_info": "label.nCoV2019_url_info",
+  "settings": {
+    "Import": "settings|Import",
+    "maps_import_text": "settings|maps_import_text",
+    "maps_import_disclaimer": "settings|maps_import_disclaimer",
+    "Settings": "settings|Settings",
+    "Choose a provider": "settings|Choose a provider",
+    "choose_provider_subtitle": "settings|choose_provider_subtitle",
+    "News": "settings|News",
+    "news_subtitle": "settings|news_subtitle",
+    "Event history": "settings|Event history",
+    "event_history_subtitle": "settings|event_history_subtitle",
+    "tested_positive_title": "settings|tested_positive_title",
+    "tested_positive_subtitle": "settings|tested_positive_subtitle",
+    "Legal": "settings|Legal"
   }
 }
