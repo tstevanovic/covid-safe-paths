@@ -55,15 +55,15 @@ class ImportScreen extends Component {
     let counter = 0;
     return (
       <NavigationBarWrapper
-        title={languages.t('label.import_title')}
+        title={t('import|Import Locations')}
         onBackPress={this.backToMain.bind(this)}>
         <View style={styles.main}>
           <View style={styles.subHeaderTitle}>
             <Text style={styles.sectionDescription}>
-              {languages.t('label.import_step_1')}
+              {t('import|Log in to your google account')}
             </Text>
             <Text style={styles.sectionDescription}>
-              {languages.t('label.import_step_2')}
+              {t('import|After downloaded ...')}
             </Text>
           </View>
           <View style={styles.web}>

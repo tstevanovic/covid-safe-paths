@@ -27,7 +27,7 @@ import { isPlatformiOS } from './../Util';
 import LinearGradient from 'react-native-linear-gradient';
 
 import Colors from '../constants/colors';
-import languages from './../locales/languages';
+import { t } from './../locales/languages';
 import licenses from './../assets/LICENSE.json';
 import { SvgXml } from 'react-native-svg';
 import close from './../assets/svgs/close';
@@ -154,18 +154,18 @@ function ExportScreen(props) {
           <ScrollView contentContainerStyle={styles.contentContainer}>
             <View style={styles.main}>
               <Text style={styles.exportSectionTitles}>
-                {languages.t('label.tested_positive_title')}
+                {t('export|I tested positive')}
               </Text>
               <Text style={styles.exportSectionPara}>
-                {languages.t('label.export_para_1')}
+                {t('export|Please do your part in stopping COVID-19 ...')}
               </Text>
               <Text style={styles.exportSectionPara}>
-                {languages.t('label.export_para_2')}
+                {t('export|Location is shared as a simple list of times ...')}
               </Text>
 
               <TouchableOpacity style={styles.exportButton} onPress={onShare}>
                 <Text style={styles.exportButtonText}>
-                  {languages.t('label.share_location_data')}
+                  {t('export|Share location data')}
                 </Text>
                 <SvgXml style={styles.exportIcon} xml={exportIcon} />
               </TouchableOpacity>

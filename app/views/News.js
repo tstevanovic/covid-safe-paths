@@ -17,7 +17,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { GetStoreData } from '../helpers/General';
 import colors from '../constants/colors';
 import { WebView } from 'react-native-webview';
-import languages from './../locales/languages';
+import { t } from './../locales/languages';
 // import { Colors } from 'react-native/Libraries/NewAppScreen';
 import fontFamily from '../constants/fonts';
 import NavigationBarWrapper from '../components/NavigationBarWrapper';
@@ -30,8 +30,8 @@ class NewsScreen extends Component {
   constructor(props) {
     super(props);
     let default_news = {
-      name: languages.t('label.default_news_site_name'),
-      url: languages.t('label.default_news_site_url'),
+      name: t('news|Default news site name'),
+      url: t('news|default_news_site_url'),
     };
     this.state = {
       visible: true,
@@ -121,7 +121,7 @@ class NewsScreen extends Component {
         colors={[Colors.VIOLET_BUTTON, Colors.VIOLET_BUTTON_DARK]}
         style={{ flex: 1, height: '100%' }}>
         <NavigationBarWrapper
-          title={languages.t('label.latest_news')}
+          title={t('news|Latest news')}
           onBackPress={this.backToMain.bind(this)}>
           <LinearGradient
             start={{ x: 0, y: 0 }}

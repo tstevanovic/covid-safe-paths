@@ -16,7 +16,7 @@ import packageJson from '../../package.json';
 import colors from '../constants/colors';
 import fontFamily from '../constants/fonts';
 import backArrow from './../assets/images/backArrow.png';
-import languages from './../locales/languages';
+import { t } from './../locales/languages';
 import AsyncStorage from '@react-native-community/async-storage';
 import { GetStoreData, SetStoreData } from '../helpers/General';
 import {
@@ -140,11 +140,11 @@ class NotificationScreen extends Component {
 
     return (
       <NavigationBarWrapper
-        title={languages.t('label.event_history_title')}
+        title={t('Event history')}
         onBackPress={this.backToMain.bind(this)}>
         <View style={styles.main}>
           <Text style={styles.pageTitle}>
-            {languages.t('label.notification_title')}
+            {t('history|2-Week Exposure Profile')}
           </Text>
           {this.state.dataAvailable ? (
             <>
@@ -158,9 +158,9 @@ class NotificationScreen extends Component {
                   tickCount={max_exposure_window}
                   tickFormat={t =>
                     t == 1
-                      ? languages.t('label.notification_today')
+                      ? t('history|Today')
                       : t == 12
-                      ? languages.t('label.notification_2_weeks_ago')
+                      ? t('history|2 weeks ago')
                       : ''
                   }
                 />
@@ -188,7 +188,7 @@ class NotificationScreen extends Component {
                   data.y === 0 ? (
                     data.x == max_exposure_window - 1 && !hasExposure ? (
                       <Text style={styles.noExposure}>
-                        {languages.t('label.notifications_no_exposure')}
+                        {t('history|No exposure')}
                       </Text>
                     ) : (
                       <Text style={{ height: 0 }}></Text>
@@ -197,16 +197,15 @@ class NotificationScreen extends Component {
                     <View key={data.x} style={styles.notificationView}>
                       <Text style={[styles.notificationsText]}>
                         {data.x == 0
-                          ? languages.t(
-                              'label.notifications_exposure_format_today',
-                              { exposureTime: data.y * bin_duration },
-                            )
+                          ? t('history|notifications_exposure_format_today', {
+                              exposureTime: data.y * bin_duration,
+                            })
                           : data.x == 1
-                          ? languages.t(
-                              'label.notifications_exposure_format_yesterday',
+                          ? t(
+                              'history|notifications_exposure_format_yesterday',
                               { exposureTime: data.y * bin_duration },
                             )
-                          : languages.t('label.notifications_exposure_format', {
+                          : t('history|notifications_exposure_format', {
                               daysAgo: data.x,
                               exposureTime: data.y * bin_duration,
                             })}
@@ -215,34 +214,34 @@ class NotificationScreen extends Component {
                     </View>
                   ),
                 )}
-                <Text style={styles.whatNextHeader}>What does this mean?</Text>
-                <Text style={styles.whatNextBody}>
-                  Individuals who don't exhibit symptoms can sometimes still
-                  carry the infection and infect others. Being careful about
-                  social distancing and coming in contact with large groups or
-                  at risk individuals (the elderly, those with significant other
-                  medical issues) is important to manage both your risk and the
-                  risk to others.
+                <Text style={styles.whatNextHeader}>
+                  {t('history|What does this mean?')}
                 </Text>
                 <Text style={styles.whatNextBody}>
-                  If you have no symptoms but still would like to be tested you
-                  can go to your nearest testing site.
+                  {t(
+                    `history|Individuals who don't exhibit symptoms can sometimes still ...`,
+                  )}
+                </Text>
+                <Text style={styles.whatNextBody}>
+                  {t(
+                    'If you have no symptoms but still would like to be tested you can go to your nearest testing site.',
+                  )}
                 </Text>
               </ScrollView>
             </>
           ) : (
             <>
               <Text style={styles.mainText}>
-                {languages.t('label.notification_data_not_available')}
+                {t('history|No data available')}
               </Text>
               <Text style={styles.mainText}>
-                {languages.t('label.notification_warning_text')}
+                {t('history|If a Healthcare Authority exists in your area ...')}
               </Text>
               <TouchableOpacity
                 style={styles.buttonTouchable}
                 onPress={() => this.goToSettings()}>
                 <Text style={styles.buttonText}>
-                  {languages.t('label.notification_random_data_button')}
+                  {t('history|Select Healthcare Authority')}
                 </Text>
               </TouchableOpacity>
             </>

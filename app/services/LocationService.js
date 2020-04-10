@@ -5,7 +5,7 @@ import { PERMISSIONS, check, RESULTS, request } from 'react-native-permissions';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import PushNotification from 'react-native-push-notification';
 import { isPlatformAndroid } from '../Util';
-import languages from '../locales/languages';
+import { t } from '../locales/languages';
 
 let isBackgroundGeolocationConfigured = false;
 
@@ -17,8 +17,7 @@ export class LocationData {
     this.minLocationSaveInterval = Math.floor(this.locationInterval * 0.8); // Minimum time between location information saves.  60000*4 = 4 minutes
 
     // Maximum time that we will backfill for missing data
-    this.maxBackfillTime = 60000 * 60 * 8 // Time (in milliseconds).  60000 * 60 * 8 = 8 hours
-
+    this.maxBackfillTime = 60000 * 60 * 8; // Time (in milliseconds).  60000 * 60 * 8 = 8 hours
   }
 
   getLocationData() {
@@ -55,7 +54,6 @@ export class LocationData {
   saveLocation(location) {
     // Persist this location data in our local storage of time/lat/lon values
     this.getLocationData().then(locationArray => {
-
       // Always work in UTC, not the local time in the locationData
       let unixtimeUTC = Math.floor(location['time']);
       let unixtimeUTC_28daysAgo = unixtimeUTC - 60 * 60 * 24 * 1000 * 28;
@@ -81,7 +79,7 @@ export class LocationData {
 
       // Backfill the stationary points, if available
       // The assumption is that if we see a gap in the data, the
-      // best guess is that the person was in that location for 
+      // best guess is that the person was in that location for
       // the entire time.  This makes it easier for a health authority
       // person to have a set of locations over time, and they can manually
       // redact the time frames that aren't correct.
@@ -93,7 +91,7 @@ export class LocationData {
         // To protect ourselves, we won't backfill more than the
         // maxBackfillTime
         let lastRecordedTime = lastLocationArray['time'];
-        if ((unixtimeUTC - lastRecordedTime) > this.maxBackfillTime) {
+        if (unixtimeUTC - lastRecordedTime > this.maxBackfillTime) {
           lastRecordedTime = unixtimeUTC - this.maxBackfillTime;
         }
 
@@ -105,9 +103,9 @@ export class LocationData {
           let lat_lon_time = {
             latitude: lastLocationArray['latitude'],
             longitude: lastLocationArray['longitude'],
-            time: newTS
+            time: newTS,
           };
-          console.log('[INFO] backfill location:',lat_lon_time);
+          console.log('[INFO] backfill location:', lat_lon_time);
           curated.push(lat_lon_time);
         }
       }
@@ -117,10 +115,10 @@ export class LocationData {
       let lat_lon_time = {
         latitude: location['latitude'],
         longitude: location['longitude'],
-        time: unixtimeUTC
+        time: unixtimeUTC,
       };
       curated.push(lat_lon_time);
-      console.log('[INFO] saved location:',lat_lon_time);
+      console.log('[INFO] saved location:', lat_lon_time);
 
       SetStoreData('LOCATION_DATA', curated);
     });
@@ -153,8 +151,10 @@ export default class LocationServices {
       desiredAccuracy: BackgroundGeolocation.HIGH_ACCURACY,
       stationaryRadius: 5,
       distanceFilter: 5,
-      notificationTitle: languages.t('label.location_enabled_title'),
-      notificationText: languages.t('label.location_enabled_message'),
+      notificationTitle: t('location|COVID Safe Paths Enabled'),
+      notificationText: t(
+        'location|COVID Safe Paths is securely storing your GPS coordinates once every five minutes on this device.',
+      ),
       debug: false, // when true, it beeps every time a loc is read
       startOnBoot: true,
       stopOnTerminate: false,
@@ -220,15 +220,15 @@ export default class LocationServices {
         // setTimeout(
         //   () =>
         //     Alert.alert(
-        //       languages.t('label.require_location_information_title'),
-        //       languages.t('label.require_location_information_message'),
+        //       t('location|label.require_location_information_title'),
+        //       t('location|label.require_location_information_message'),
         //       [
         //         {
-        //           text: languages.t('label.yes'),
+        //           text: t('location|label.yes'),
         //           onPress: () => BackgroundGeolocation.showAppSettings(),
         //         },
         //         {
-        //           text: languages.t('label.no'),
+        //           text: t('location|label.no'),
         //           onPress: () => console.log('No Pressed'),
         //           style: 'cancel',
         //         },
@@ -297,11 +297,11 @@ export default class LocationServices {
         // setTimeout(
         //   () =>
         //     Alert.alert(
-        //       languages.t('label.require_location_services_title'),
-        //       languages.t('label.require_location_services_message'),
+        //       t('location|label.require_location_services_title'),
+        //       t('location|label.require_location_services_message'),
         //       [
         //         {
-        //           text: languages.t('label.yes'),
+        //           text: t('location|label.yes'),
         //           onPress: () => {
         //             if (isPlatformAndroid()) {
         //               // showLocationSettings() only works for android
@@ -312,7 +312,7 @@ export default class LocationServices {
         //           },
         //         },
         //         {
-        //           text: languages.t('label.no'),
+        //           text: t('location|label.no'),
         //           onPress: () => console.log('No Pressed'),
         //           style: 'cancel',
         //         },
@@ -325,15 +325,15 @@ export default class LocationServices {
         // setTimeout(
         //   () =>
         //     Alert.alert(
-        //       languages.t('label.require_location_information_title'),
-        //       languages.t('label.require_location_information_message'),
+        //       t('location|label.require_location_information_title'),
+        //       t('location|label.require_location_information_message'),
         //       [
         //         {
-        //           text: languages.t('label.yes'),
+        //           text: t('location|label.yes'),
         //           onPress: () => BackgroundGeolocation.showAppSettings(),
         //         },
         //         {
-        //           text: languages.t('label.no'),
+        //           text: t('location|label.no'),
         //           onPress: () => console.log('No Pressed'),
         //           style: 'cancel',
         //         },
@@ -348,8 +348,8 @@ export default class LocationServices {
   static stop() {
     // unregister all event listeners
     PushNotification.localNotification({
-      title: languages.t('label.location_disabled_title'),
-      message: languages.t('label.location_disabled_message'),
+      title: t('location|label.location_disabled_title'),
+      message: t('location|label.location_disabled_message'),
     });
     BackgroundGeolocation.removeAllListeners();
     BackgroundGeolocation.stop();

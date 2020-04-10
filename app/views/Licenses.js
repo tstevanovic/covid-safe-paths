@@ -16,7 +16,7 @@ import packageJson from '../../package.json';
 
 import Colors from '../constants/colors';
 import fontFamily from '../constants/fonts';
-import languages from './../locales/languages';
+import { t } from './../locales/languages';
 import licenses from './../assets/LICENSE.json';
 import NavigationBarWrapper from '../components/NavigationBarWrapper';
 import foreArrow from './../assets/images/foreArrow.png';
@@ -36,7 +36,7 @@ class LicensesScreen extends Component {
   };
 
   handleTermsOfUsePressed() {
-    Linking.openURL(languages.t('label.terms_of_use_url'));
+    Linking.openURL(t('legal|terms_of_use_url'));
   }
 
   componentDidMount() {
@@ -68,7 +68,7 @@ class LicensesScreen extends Component {
   render() {
     return (
       <NavigationBarWrapper
-        title={languages.t('label.legal_page_title')}
+        title={t('Legal')}
         onBackPress={this.backToMain.bind(this)}>
         <ScrollView contentContainerStyle={styles.contentContainer}>
           <View style={styles.main}>
@@ -110,10 +110,8 @@ class LicensesScreen extends Component {
           <View style={styles.termsInfoContainer}>
             <Text
               style={styles.mainTermsHeader}
-              onPress={() =>
-                Linking.openURL(languages.t('label.terms_of_use_url'))
-              }>
-              {languages.t('label.terms_of_use')}
+              onPress={() => Linking.openURL(t('legal|terms_of_use_url'))}>
+              {t('legal|Terms of Use')}
             </Text>
           </View>
           <View style={styles.arrowContainer}>

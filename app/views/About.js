@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, ScrollView, BackHandler } from 'react-native';
 
-import languages from './../locales/languages';
+import { t } from './../locales/languages';
 import { isPlatformiOS } from './../Util';
 import Colors from '../constants/colors';
 import fontFamily from './../constants/fonts';
@@ -38,7 +38,7 @@ class AboutScreen extends Component {
   render() {
     return (
       <NavigationBarWrapper
-        title={languages.t('label.about_title')}
+        title={t('About')}
         onBackPress={this.backToMain.bind(this)}>
         <ScrollView contentContainerStyle={styles.contentContainer}>
           <View style={styles.spacer} />
@@ -46,19 +46,19 @@ class AboutScreen extends Component {
           <View style={styles.spacer} />
 
           <SvgXml style={styles.aboutSectionIconLock} xml={lock} />
-          <Text style={styles.aboutSectionTitles}>
-            {languages.t('label.commitment')}
-          </Text>
+          <Text style={styles.aboutSectionTitles}>{t('about|Commitment')}</Text>
           <Text style={styles.aboutSectionPara}>
-            {languages.t('label.commitment_para')}
+            {t(
+              'about|Safe Paths securely records and checks your interaction with people using your location. Your data will NEVER leave your phone without your consent.',
+            )}
           </Text>
 
           <SvgXml style={styles.aboutSectionIconTeam} xml={team} />
-          <Text style={styles.aboutSectionTitles}>
-            {languages.t('label.team')}
-          </Text>
+          <Text style={styles.aboutSectionTitles}>{t('about|Team')}</Text>
           <Text style={styles.aboutSectionPara}>
-            {languages.t('label.team_para')}
+            {t(
+              'about|Our team is composed of a consortium of epidemiologists, engineers, data scientists, digital privacy evangelists, professors and researchers from reputable institutions, including: MIT, Harvard, The Mayo Clinic, TripleBlind, EyeNetra, Ernst & Young and Link Ventures.',
+            )}
           </Text>
         </ScrollView>
       </NavigationBarWrapper>

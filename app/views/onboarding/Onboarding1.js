@@ -12,7 +12,7 @@ import BackgroundOverlayImage from './../../assets/images/launchScreenBackground
 import ButtonWrapper from '../../components/ButtonWrapper';
 import Colors from '../../constants/colors';
 import fontFamily from '../../constants/fonts';
-import languages, { findUserLang } from './../../locales/languages';
+import languages, { t, findUserLang } from './../../locales/languages';
 import NativePicker from '../../components/NativePicker';
 import { SetStoreData } from '../../helpers/General';
 
@@ -79,12 +79,12 @@ class Onboarding extends Component {
             </View>
             <View style={styles.contentContainer}>
               <Text style={styles.mainText}>
-                {languages.t('label.launch_screen1_header')}
+                {t('onboarding|The way back to normal starts here')}
               </Text>
             </View>
             <View style={styles.footerContainer}>
               <ButtonWrapper
-                title={languages.t('label.launch_get_started')}
+                title={t('onboarding|Get Started')}
                 onPress={() => {
                   this.props.navigation.replace('Onboarding2');
                 }}

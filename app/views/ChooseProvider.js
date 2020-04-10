@@ -30,7 +30,7 @@ import fontFamily from '../constants/fonts';
 import backArrow from './../assets/images/backArrow.png';
 import closeIcon from './../assets/images/closeIcon.png';
 import saveIcon from './../assets/images/saveIcon.png';
-import languages from '../locales/languages';
+import { t } from '../locales/languages';
 import NavigationBarWrapper from '../components/NavigationBarWrapper';
 
 const authoritiesListURL =
@@ -174,16 +174,16 @@ class ChooseProviderScreen extends Component {
 
   removeAuthorityFromState(authority) {
     Alert.alert(
-      languages.t('label.authorities_removal_alert_title'),
-      languages.t('label.authorities_removal_alert_desc'),
+      t('provider|authorities_removal_alert_title'),
+      t('provider|authorities_removal_alert_desc'),
       [
         {
-          text: languages.t('label.authorities_removal_alert_cancel'),
+          text: t('Cancel'),
           onPress: () => console.log('Cancel Pressed'),
           style: 'cancel',
         },
         {
-          text: languages.t('label.authorities_removal_alert_proceed'),
+          text: t('provider|authorities_removal_alert_proceed'),
           onPress: () => {
             let removalIndex = this.state.selectedAuthorities.indexOf(
               authority,
@@ -212,14 +212,14 @@ class ChooseProviderScreen extends Component {
   render() {
     return (
       <NavigationBarWrapper
-        title={languages.t('label.choose_provider_title')}
+        title={t('provider|Choose health authority')}
         onBackPress={this.backToMain.bind(this)}>
         <View style={styles.main}>
           <Text style={styles.headerTitle}>
-            {languages.t('label.authorities_title')}
+            {t('provider|Trusted sources')}
           </Text>
           <Text style={styles.sectionDescription}>
-            {languages.t('label.authorities_desc')}
+            {t('provider|You can get data from one or more h...')}
           </Text>
         </View>
 
@@ -236,7 +236,7 @@ class ChooseProviderScreen extends Component {
                     color: '#dd0000',
                   })
                 }>
-                {languages.t('label.authorities_no_sources')}
+                {t('provider|No sources')}
               </Text>
               <View
                 style={[
@@ -252,9 +252,7 @@ class ChooseProviderScreen extends Component {
                   value={this.state.urlText}
                   autoFocus={this.state.urlEntryInProgress}
                   style={[styles.item, styles.textInput]}
-                  placeholder={languages.t(
-                    'label.authorities_input_placeholder',
-                  )}
+                  placeholder={t('provider|authorities_input_placeholder')}
                   onSubmitEditing={() =>
                     this.addCustomUrlToState(this.state.urlText)
                   }
@@ -281,7 +279,7 @@ class ChooseProviderScreen extends Component {
                   value={this.state.urlText}
                   autoFocus={this.state.urlEntryInProgress}
                   style={[styles.item, styles.textInput]}
-                  placeholder='Paste your URL here'
+                  placeholder={t('provider|Paste your URL here')}
                   onSubmitEditing={() =>
                     this.addCustomUrlToState(this.state.urlText)
                   }
@@ -319,7 +317,7 @@ class ChooseProviderScreen extends Component {
               }
               disabled={this.state.urlEditInProgress}>
               <Text style={styles.startLoggingButtonText}>
-                {languages.t('label.authorities_add_button_label')}
+                {t('provider|Add Trusted Source')}
               </Text>
             </TouchableOpacity>
           </MenuTrigger>
@@ -348,9 +346,7 @@ class ChooseProviderScreen extends Component {
                   urlEntryInProgress: true,
                 });
               }}>
-              <Text style={styles.menuOptionText}>
-                {languages.t('label.authorities_add_url')}
-              </Text>
+              <Text style={styles.menuOptionText}>{t('provider|Add URL')}</Text>
             </MenuOption>
           </MenuOptions>
         </Menu>

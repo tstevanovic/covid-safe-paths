@@ -17,7 +17,7 @@ module.exports = {
   keepRemoved: false,
   // Keep keys from the catalog that are no longer in code
 
-  keySeparator: '.',
+  keySeparator: '|',
   // Key separator used in your translation keys
   // If you want to use plain english keys, separators such as `.` and `:` will conflict. You might want to set `keySeparator: false` and `namespaceSeparator: false`. That way, `t('Status: Loading...')` will not think that there are a namespace and three separator dots for instance.
 
@@ -41,7 +41,7 @@ module.exports = {
   locales: ['en', 'ht'],
   // An array of the locales in your applications
 
-  namespaceSeparator: ':',
+  namespaceSeparator: '~',
   // Namespace separator used in your translation keys
   // If you want to use plain english keys, separators such as `.` and `:` will conflict. You might want to set `keySeparator: false` and `namespaceSeparator: false`. That way, `t('Status: Loading...')` will not think that there are a namespace and three separator dots for instance.
 
@@ -58,10 +58,10 @@ module.exports = {
   // For react file, extract the defaultNamespace - https://react.i18next.com/components/translate-hoc.html
   // Ignored when parsing a `.jsx` file and namespace is extracted from that file.
 
-  sort: true,
+  sort: false,
   // Whether or not to sort the catalog
 
-  useKeysAsDefaultValue: false,
+  useKeysAsDefaultValue: true,
   // Whether to use the keys as the default value; ex. "Hello": "Hello", "World": "World"
   // The option `defaultValue` will not work if this is set to true
 

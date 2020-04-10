@@ -41,7 +41,7 @@ import foreArrow from './../assets/images/foreArrow.png';
 
 import { IntersectSet } from '../helpers/Intersect';
 import { GetStoreData, SetStoreData } from '../helpers/General';
-import languages from '../locales/languages';
+import { t } from '../locales/languages';
 
 import { SvgXml } from 'react-native-svg';
 import StateAtRisk from './../assets/svgs/stateAtRisk';
@@ -232,8 +232,8 @@ class LocationTracking extends Component {
                 IntersectSet(responseJson.concern_points, dayBin => {
                   if (dayBin !== null) {
                     PushNotification.localNotification({
-                      title: languages.t('label.push_at_risk_title'),
-                      message: languages.t('label.push_at_risk_message'),
+                      title: t('main|push_at_risk_title'),
+                      message: t('main|push_at_risk_message'),
                     });
                   }
                 });
@@ -411,20 +411,18 @@ class LocationTracking extends Component {
     switch (this.state.currentState) {
       case StateEnum.NO_CONTACT:
         return (
-          <Text style={styles.mainTextBelow}>
-            {languages.t('label.home_no_contact_header')}
-          </Text>
+          <Text style={styles.mainTextBelow}>{t('main|No known contact')}</Text>
         );
       case StateEnum.AT_RISK:
         return (
           <Text style={styles.mainTextAbove}>
-            {languages.t('label.home_at_risk_header')}
+            {t('main|home_at_risk_header')}
           </Text>
         );
       case StateEnum.UNKNOWN:
         return (
           <Text style={styles.mainTextBelow}>
-            {languages.t('label.home_unknown_header')}
+            {t('main|home_unknown_header')}
           </Text>
         );
     }
@@ -433,11 +431,13 @@ class LocationTracking extends Component {
   getSubText() {
     switch (this.state.currentState) {
       case StateEnum.NO_CONTACT:
-        return languages.t('label.home_no_contact_subtext');
+        return t(
+          `main|You haven't been near anyone who has tested positive for COVID-19.`,
+        );
       case StateEnum.AT_RISK:
-        return languages.t('label.home_at_risk_subtext');
+        return t('main|home_at_risk_subtext');
       case StateEnum.UNKNOWN:
-        return languages.t('label.home_unknown_subtext');
+        return t('main|home_unknown_subtext');
     }
   }
   getSubSubText() {
@@ -445,7 +445,7 @@ class LocationTracking extends Component {
       case StateEnum.NO_CONTACT:
         return null;
       case StateEnum.AT_RISK:
-        return languages.t('label.home_at_risk_subsubtext');
+        return t('main|home_at_risk_subsubtext');
       case StateEnum.UNKNOWN:
         return null;
     }
@@ -462,12 +462,12 @@ class LocationTracking extends Component {
       // };
       return;
     } else if (this.state.currentState === StateEnum.AT_RISK) {
-      buttonLabel = languages.t('label.home_next_steps');
+      buttonLabel = t('main|Next steps');
       buttonFunction = () => {
         this.props.navigation.navigate('NotificationScreen');
       };
     } else if (this.state.currentState === StateEnum.UNKNOWN) {
-      buttonLabel = languages.t('label.home_enable_location');
+      buttonLabel = t('Enable location');
       buttonFunction = () => {
         openSettings();
       };
@@ -487,7 +487,7 @@ class LocationTracking extends Component {
   }
 
   getMayoInfoPressed() {
-    Linking.openURL(languages.t('label.home_mayo_link_URL'));
+    Linking.openURL(t('home_mayo_link_URL'));
   }
 
   render() {
@@ -516,17 +516,13 @@ class LocationTracking extends Component {
             <View style={styles.mayoInfoContainer}>
               <Text
                 style={styles.mainMayoHeader}
-                onPress={() =>
-                  Linking.openURL(languages.t('label.home_mayo_link_URL'))
-                }>
-                {languages.t('label.home_mayo_link_heading')}
+                onPress={() => Linking.openURL(t('home_mayo_link_URL'))}>
+                {t('main|home_mayo_link_heading')}
               </Text>
               <Text
                 style={styles.mainMayoSubtext}
-                onPress={() =>
-                  Linking.openURL(languages.t('label.home_mayo_link_URL'))
-                }>
-                {languages.t('label.home_mayo_link_label')}
+                onPress={() => Linking.openURL(t('home_mayo_link_URL'))}>
+                {t('main|home_mayo_link_label')}
               </Text>
             </View>
             <View style={styles.arrowContainer}>

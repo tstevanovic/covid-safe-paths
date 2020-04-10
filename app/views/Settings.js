@@ -17,7 +17,7 @@ const authoritiesListURL =
   'https://raw.githubusercontent.com/tripleblindmarket/safe-places/develop/healthcare-authorities.yaml';
 
 const width = Dimensions.get('window').width;
-import languages from './../locales/languages';
+import { t } from './../locales/languages';
 import ButtonWrapper from '../components/ButtonWrapper';
 import NavigationBarWrapper from '../components/NavigationBarWrapper';
 import Colors from '../constants/colors';
@@ -85,17 +85,15 @@ class SettingsScreen extends Component {
         <View style={styles.section}>
           <View style={styles.iconRowContainer}>
             <SvgXml xml={googleMapsIcon} style={{ alignSelf: 'center' }} />
-            <Text style={styles.iconRowText}>
-              {languages.t('label.maps_import_title')}
-            </Text>
+            <Text style={styles.iconRowText}>{t('settings|Import')}</Text>
           </View>
           <View style={styles.sectionRowContainer}>
             <Text style={styles.settingRowText}>
-              {languages.t('label.maps_import_text')}
+              {t('settings|maps_import_text')}
             </Text>
           </View>
           <ButtonWrapper
-            title={languages.t('label.maps_import_button_text')}
+            title={t('settings|Import')}
             onPress={this.importButtonPressed.bind(this)}
             buttonColor={Colors.VIOLET}
             bgColor={Colors.WHITE}
@@ -104,7 +102,7 @@ class SettingsScreen extends Component {
           />
           <View style={styles.sectionRowContainer}>
             <Text style={styles.settingRowNoteText}>
-              {languages.t('label.maps_import_disclaimer')}
+              {t('settings|maps_import_disclaimer')}
             </Text>
           </View>
         </View>
@@ -153,7 +151,7 @@ class SettingsScreen extends Component {
   render() {
     return (
       <NavigationBarWrapper
-        title={languages.t('label.settings_title')}
+        title={t('settings|Settings')}
         onBackPress={this.backToMain.bind(this)}>
         <ScrollView contentContainerStyle={styles.contentContainer}>
           {/* TODO FIX THIS - don't remove */}
@@ -169,35 +167,35 @@ class SettingsScreen extends Component {
           <View style={styles.mainContainer}>
             <View style={styles.section}>
               {this.getSettingRow(
-                languages.t('label.choose_provider_title'),
+                t('settings|Choose a provider'),
                 this.chooseProviderScreenButtonPressed,
                 null,
                 null,
-                languages.t('label.choose_provider_subtitle'),
+                t('settings|choose_provider_subtitle'),
               )}
               <View style={styles.divider}></View>
               {this.getSettingRow(
-                languages.t('label.news_title'),
+                t('settings|News'),
                 this.newsButtonPressed,
                 null,
                 null,
-                languages.t('label.news_subtitle'),
+                t('settings|news_subtitle'),
               )}
               <View style={styles.divider}></View>
               {this.getSettingRow(
-                languages.t('label.event_history_title'),
+                t('settings|Event history'),
                 this.eventHistoryButtonPressed,
                 null,
                 null,
-                languages.t('label.event_history_subtitle'),
+                t('settings|event_history_subtitle'),
               )}
               <View style={styles.divider}></View>
               {this.getSettingRow(
-                languages.t('label.tested_positive_title'),
+                t('settings|tested_positive_title'),
                 this.testedPositiveButtonPressed,
                 null,
                 null,
-                languages.t('label.tested_positive_subtitle'),
+                t('settings|tested_positive_subtitle'),
               )}
             </View>
           </View>
@@ -208,13 +206,10 @@ class SettingsScreen extends Component {
           <View style={styles.fullDivider} />
           <View style={styles.mainContainer}>
             <View style={styles.section}>
-              {this.getSettingRow(
-                languages.t('label.about_title'),
-                this.aboutButtonPressed,
-              )}
+              {this.getSettingRow(t('About'), this.aboutButtonPressed)}
               <View style={styles.divider}></View>
               {this.getSettingRow(
-                languages.t('label.legal_page_title'),
+                t('settings|Legal'),
                 this.licensesButtonPressed,
               )}
             </View>
