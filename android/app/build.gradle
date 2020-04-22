@@ -137,8 +137,8 @@ android {
         testBuildType System.getProperty('testBuildType', 'debug')
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
 
-        versionCode rootProject.ext.versionCode
-        versionName rootProject.ext.versionName
+        versionCode 23
+        versionName "0.9.5"
     }
     splits {
         abi {
@@ -156,7 +156,15 @@ android {
             keyPassword 'android'
         }
         release {
-           
+            if (project.hasProperty('PRIVATEKIT_RELEASE_STORE_FILE')) {
+                project.logger.lifecycle('Signing app with ' + PRIVATEKIT_RELEASE_STORE_FILE)
+                storeFile file(PRIVATEKIT_RELEASE_STORE_FILE)
+                storePassword PRIVATEKIT_RELEASE_STORE_PASSWORD
+                keyAlias PRIVATEKIT_RELEASE_KEY_ALIAS
+                keyPassword PRIVATEKIT_RELEASE_KEY_PASSWORD
+            } else {
+                project.logger.lifecycle('Could not find release key')
+            }
         }
 
     }
@@ -184,10 +192,6 @@ android {
                         versionCodes.get(abi) * 1048576 + defaultConfig.versionCode
             }
 
-            output.outputFileName = output.outputFileName
-                        .replace("app-", "SafePaths-")
-                        .replace("unsigned", "")
-                        .replace(".apk", "${variant.versionName}.apk")
         }
     }
 }
