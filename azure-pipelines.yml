@@ -42,7 +42,7 @@ steps:
   inputs:
     serverEndpoint: 'EYAppCenter'
     appSlug: 'EYChile/SafePaths'
-    appFile: 'android/app/build/outputs/apk/release'
+    appFile: 'android/app/build/outputs/apk/release/*.apk'
     symbolsOption: 'Android'
     releaseNotesOption: 'input'
     releaseNotesInput: 'DevTest'
