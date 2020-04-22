@@ -1,6 +1,11 @@
 name: Lint
 
 on:
+  push:
+    branches:
+      - develop
+      - release-candidate
+      - master
   pull_request:
     branches:
       - develop

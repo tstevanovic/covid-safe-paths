@@ -84,7 +84,6 @@ exports[`renders correctly 1`] = `
             "color": "#FFF",
             "fontFamily": "IBMPlexSans-Medium",
             "fontSize": 26,
-            "paddingHorizontal": 20,
             "position": "absolute",
             "textAlign": "center",
             "width": "100%",
@@ -171,7 +170,7 @@ exports[`renders correctly 1`] = `
           />
           <View
             accessible={true}
-            focusable={true}
+            focusable={false}
             isTVSelectable={true}
             style={
               Object {
@@ -219,94 +218,132 @@ exports[`renders correctly 1`] = `
                 }
                 use="body1"
               >
-                English
+                Unknown
               </Text>
             </View>
           </View>
-          <Modal
-            animationType="slide"
-            hardwareAccelerated={false}
-            transparent={true}
-            visible={false}
-          >
-            <View
-              style={
-                Object {
-                  "flex": 2,
-                }
+          <View
+            style={
+              Object {
+                "height": 40,
+                "marginTop": -40,
               }
-            >
+            }
+          >
+            <View>
               <View
                 accessible={true}
                 focusable={true}
+                isTVSelectable={true}
                 style={
                   Object {
-                    "backgroundColor": "#000000",
-                    "flex": 1,
-                    "opacity": 0.2,
+                    "backgroundColor": "#ffffff",
+                    "borderRadius": 100,
+                    "opacity": 0,
+                    "paddingHorizontal": 11,
+                    "paddingVertical": 4,
                   }
                 }
-              />
-            </View>
-            <View
-              style={
-                Object {
-                  "backgroundColor": "#ffffff",
-                  "flex": 1,
-                }
-              }
-            >
-              <View
-                accessible={true}
-                focusable={true}
               >
-                <View>
-                  <Text
+                <Text
+                  style={
+                    Object {
+                      "color": "#4051DB",
+                      "fontSize": 12,
+                      "textAlign": "center",
+                      "textTransform": "uppercase",
+                    }
+                  }
+                >
+                  
+                </Text>
+              </View>
+              <Modal
+                animationType="slide"
+                hardwareAccelerated={false}
+                transparent={true}
+                visible={false}
+              >
+                <View
+                  style={
+                    Object {
+                      "flex": 2,
+                    }
+                  }
+                >
+                  <View
+                    accessible={true}
+                    focusable={true}
                     style={
                       Object {
-                        "color": "#007aff",
-                        "fontWeight": "bold",
-                        "marginRight": 22,
-                        "marginTop": 16,
-                        "textAlign": "right",
+                        "backgroundColor": "#000000",
+                        "flex": 1,
+                        "opacity": 0.2,
                       }
                     }
-                  >
-                    Done
-                  </Text>
+                  />
                 </View>
-                <View>
-                  <View>
-                    <RCTPicker
-                      items={
-                        Array [
+                <View
+                  style={
+                    Object {
+                      "backgroundColor": "#ffffff",
+                      "flex": 1,
+                    }
+                  }
+                >
+                  <View
+                    accessible={true}
+                    focusable={true}
+                  >
+                    <View>
+                      <Text
+                        style={
                           Object {
-                            "label": "English",
-                            "textColor": undefined,
-                            "value": "en",
-                          },
-                          Object {
-                            "label": "Other",
-                            "textColor": undefined,
-                            "value": "ot",
-                          },
-                        ]
-                      }
-                      selectedIndex={0}
-                      style={
-                        Array [
-                          Object {
-                            "height": 216,
-                          },
-                          undefined,
-                        ]
-                      }
-                    />
+                            "color": "#007aff",
+                            "fontWeight": "bold",
+                            "marginRight": 22,
+                            "marginTop": 16,
+                            "textAlign": "right",
+                          }
+                        }
+                      >
+                        Done
+                      </Text>
+                    </View>
+                    <View>
+                      <View>
+                        <RCTPicker
+                          items={
+                            Array [
+                              Object {
+                                "label": "English",
+                                "textColor": undefined,
+                                "value": "en",
+                              },
+                              Object {
+                                "label": "Other",
+                                "textColor": undefined,
+                                "value": "ot",
+                              },
+                            ]
+                          }
+                          selectedIndex={0}
+                          style={
+                            Array [
+                              Object {
+                                "height": 216,
+                              },
+                              undefined,
+                            ]
+                          }
+                        />
+                      </View>
+                    </View>
                   </View>
                 </View>
-              </View>
+              </Modal>
             </View>
-          </Modal>
+          </View>
         </View>
         <View
           style={

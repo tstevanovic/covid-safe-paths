@@ -3,31 +3,15 @@ import {
   Modal,
   Picker,
   Platform,
+  StyleSheet,
   Text,
+  TextInput,
+  TouchableOpacity,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
 
-import languages from '../locales/languages';
-
-/**
- * Native dropdown that abstracts away the UI differences for iOS and Android.
- *
- * Usage:
- *
- *
- * ```jsx
- * <NativePicker
- *     items={[{value: 'x', label: 'X'}]}
- *     value={x}
- *     onValueChange={valueChanged}
- *   >
- *   {({label, openPicker}) => (
- *     <MyLabel onPress={openPicker}>{label}</MyLabel>
- *   )}
- * </NativePicker>
- * ```
- */
+// Code for the language select dropdown, for nice native handling on both iOS and Android.
 export default class NativePicker extends Component {
   constructor(props) {
     super(props);
@@ -37,42 +21,60 @@ export default class NativePicker extends Component {
   }
 
   render() {
-    const renderLabel = this.props.children;
-    const openPicker = () => {
-      this.setState({ modalVisible: true });
-    };
-    const selectedItem = this.props.items.find(
-      i => i.value === this.props.value,
-    );
-    const label = selectedItem?.label || '';
-    const value = selectedItem?.value;
-
     // iOS and Android Pickers behave differently, handled below
     if (Platform.OS === 'android') {
+      const selectedItem = this.props.items.find(
+        i => i.value === this.props.value,
+      );
+      const selectedLabel = selectedItem ? selectedItem.label : '';
+
       return (
-        <View>
-          {renderLabel({ value, label, openPicker })}
+        <View style={styles.inputContainer}>
+          <TouchableOpacity
+            onPress={() => this.setState({ modalVisible: true })}>
+            <TextInput
+              style={[
+                styles.touchableTrigger,
+                styles.touchableText,
+                this.props.hidden ? styles.opacityZero : null,
+              ]}
+              editable={false}
+              placeholder='Select language'
+              onChangeText={searchString => {
+                this.setState({ searchString });
+              }}
+              value={selectedLabel}
+            />
+          </TouchableOpacity>
           <Picker
             selectedValue={this.props.value}
             onValueChange={this.props.onValueChange}
-            style={{
-              opacity: 0,
-              position: 'absolute',
-              left: 0,
-              right: 0,
-              top: 0,
-              bottom: 0,
-            }}>
-            {this.props.items.map(i => (
-              <Picker.Item key={i.value} label={i.label} value={i.value} />
+            style={{ opacity: 0, marginTop: -45 }}>
+            {this.props.items.map((i, index) => (
+              <Picker.Item key={index} label={i.label} value={i.value} />
             ))}
           </Picker>
         </View>
       );
     } else {
+      const selectedItem = this.props.items.find(
+        i => i.value === this.props.value,
+      );
+      const selectedLabel = selectedItem ? selectedItem.label : '';
+
       return (
-        <>
-          {renderLabel({ value, label, openPicker })}
+        <View style={styles.inputContainer}>
+          <TouchableOpacity
+            onPress={() => {
+              this.setState({ modalVisible: true });
+            }}
+            style={[
+              styles.touchableTrigger,
+              this.props.hidden ? styles.opacityZero : null,
+            ]}>
+            <Text style={styles.touchableText}>{selectedLabel}</Text>
+          </TouchableOpacity>
+
           <Modal
             animationType='slide'
             transparent
@@ -93,8 +95,8 @@ export default class NativePicker extends Component {
             <View style={{ flex: 1, backgroundColor: '#ffffff' }}>
               <TouchableWithoutFeedback
                 onPress={() => this.setState({ modalVisible: false })}>
-                <View>
-                  <View>
+                <View style={styles.modalContainer}>
+                  <View style={styles.modalContent}>
                     <Text
                       style={{
                         color: '#007aff',
@@ -104,18 +106,18 @@ export default class NativePicker extends Component {
                         marginRight: 22,
                       }}
                       onPress={() => this.setState({ modalVisible: false })}>
-                      {languages.t('Done')}
+                      Done
                     </Text>
                   </View>
                   <View
-                    onStartShouldSetResponder={() => true}
-                    onResponderReject={() => {}}>
+                    onStartShouldSetResponder={evt => true}
+                    onResponderReject={evt => {}}>
                     <Picker
                       selectedValue={this.props.value}
                       onValueChange={this.props.onValueChange}>
-                      {this.props.items.map(i => (
+                      {this.props.items.map((i, index) => (
                         <Picker.Item
-                          key={i.value}
+                          key={index}
                           label={i.label}
                           value={i.value}
                         />
@@ -126,8 +128,53 @@ export default class NativePicker extends Component {
               </TouchableWithoutFeedback>
             </View>
           </Modal>
-        </>
+        </View>
       );
     }
   }
 }
+
+const styles = StyleSheet.create({
+  mainContainer: {
+    flex: 1,
+    backgroundColor: '#ffffff',
+  },
+  imageContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: '3%',
+  },
+  descriptionContainer: {
+    flex: 1,
+    flexDirection: 'row',
+  },
+  descriptionIconContainer: {
+    alignSelf: 'center',
+  },
+  descriptionIcon: {
+    width: 10,
+    height: 10,
+    resizeMode: 'contain',
+  },
+  descriptionTextContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    marginLeft: '5%',
+  },
+  touchableTrigger: {
+    backgroundColor: '#ffffff',
+    opacity: 0.4,
+    paddingVertical: 4,
+    paddingHorizontal: 11,
+    borderRadius: 100,
+  },
+  touchableText: {
+    fontSize: 12,
+    color: '#4051DB',
+    textAlign: 'center',
+    textTransform: 'uppercase',
+  },
+  opacityZero: {
+    opacity: 0,
+  },
+});

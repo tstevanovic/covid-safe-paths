@@ -32,14 +32,23 @@ import zh_Hant from './zh-Hant.json';
 // 5. REMOVE all empty translations. e.g. "key": "", this will allow fallback to the default: English
 // 6. import xyIndex from `./xy.json` and add the language to the block at the bottom
 
+// detect and set device locale to i18n and dates
+setLocale(getDeviceLocale());
+
+// detect user override and set i18n and date locales
+getUserLocaleOverride().then(locale => locale && setLocale(locale));
+
 /** Fetch the user language override, if any */
 export async function getUserLocaleOverride() {
   return await GetStoreData(LANG_OVERRIDE);
 }
 
-export function getLanguageFromLocale(locale) {
-  const [languageCode] = toIETFLanguageTag(locale).split('-');
-  return languageCode;
+/** Get the device locale e.g. en_US */
+export function getDeviceLocale() {
+  return Platform.OS === 'ios'
+    ? NativeModules.SettingsManager.settings.AppleLocale || // iOS < 13
+        NativeModules.SettingsManager.settings.AppleLanguages[0] // iOS 13
+    : NativeModules.I18nManager.localeIdentifier; // Android
 }
 
 /**
@@ -58,7 +67,7 @@ async function setLocale(locale) {
 
 export async function setUserLocaleOverride(locale) {
   await setLocale(locale);
-  if (locale === supportedDeviceLanguageOrEnglish()) {
+  if (locale === getDeviceLocale()) {
     locale = undefined;
   }
   await SetStoreData(LANG_OVERRIDE, locale);
@@ -71,7 +80,6 @@ i18next.init({
   },
   lng: 'en', // 'en' | 'es',
   fallbackLng: 'en', // If language detector fails
-  returnEmptyString: false,
   resources: {
     en: { label: 'English', translation: en },
     es: { label: 'Español', translation: es },
@@ -106,34 +114,5 @@ export const LOCALE_NAME = Object.entries(i18next.options.resources).reduce(
   },
   {},
 );
-
-/** Get the device locale e.g. en_US */
-export function getDeviceLocale() {
-  return Platform.OS === 'ios'
-    ? NativeModules.SettingsManager.settings.AppleLocale || // iOS < 13
-        NativeModules.SettingsManager.settings.AppleLanguages[0] // iOS 13
-    : NativeModules.I18nManager.localeIdentifier; // Android
-}
-
-/**
- * Find compatible supported i18n language
- *
- * e.g. device locale `en_AU` would find `en`
- *      device locale `pt_BR` would find `pt-BR`
- */
-export function supportedDeviceLanguageOrEnglish() {
-  const locale = getDeviceLocale(); // en_US
-  const langCode = getLanguageFromLocale(locale); // en
-  const found = Object.keys(LOCALE_NAME).find(
-    l => l === langCode || toIETFLanguageTag(l) === toIETFLanguageTag(locale),
-  );
-  return found || 'en';
-}
-
-// detect and set device locale, must go after i18next.init()
-setLocale(supportedDeviceLanguageOrEnglish());
-
-// detect user override
-getUserLocaleOverride().then(locale => locale && setLocale(locale));
 
 export default i18next;

@@ -83,7 +83,6 @@ Array [
             "color": "#FFF",
             "fontFamily": "IBMPlexSans-Medium",
             "fontSize": 26,
-            "paddingHorizontal": 20,
             "position": "absolute",
             "textAlign": "center",
             "width": "100%",

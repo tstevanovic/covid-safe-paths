@@ -10,7 +10,9 @@ import languages from '../../locales/languages';
 
 export const GoogleMapsImport = ({ navigation }) => {
   const importPressed = () => {
-    navigation.navigate('ImportScreen');
+    if (__DEV__) {
+      navigation.navigate('ImportScreen');
+    }
   };
 
   return (
@@ -27,7 +29,9 @@ export const GoogleMapsImport = ({ navigation }) => {
       </ParagraphContainer>
 
       <ButtonWrapper
-        title={languages.t('label.maps_import_button_text')}
+        title={
+          __DEV__ ? languages.t('label.maps_import_button_text') : 'Coming soon'
+        }
         onPress={importPressed}
         buttonColor={Colors.VIOLET}
         bgColor={Colors.WHITE}
